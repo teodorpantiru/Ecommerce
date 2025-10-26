@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "prostore",
+		"path": ".."
+	},
+	{
+		"name": "db",
+		"path": "../../db"
+	}
+],
+  "settings": {}
+}
