@@ -1,0 +1,11 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/_not-found/page": "/_not-found",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/(root)/page": "/",
+  "/(root)/product/[slug]/page": "/product/[slug]",
+  "/(root)/cart/page": "/cart",
+  "/(root)/shipping-address/page": "/shipping-address",
+  "/(auth)/sign-up/page": "/sign-up",
+  "/(auth)/sign-in/page": "/sign-in"
+}
