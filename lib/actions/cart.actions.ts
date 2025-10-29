@@ -147,7 +147,7 @@ export async function getMyCart() {
     itemsPrice: cart.itemsPrice.toString(),
     totalPrice: cart.totalPrice.toString(),
     shippingPrice: cart.shippingPrice.toString(),
-    texPrice: cart.taxPrice.toString(),
+    taxPrice: cart.taxPrice.toString(),
     // After this we go back up to the cart page and we can use this function to get the cart
   });
 }
