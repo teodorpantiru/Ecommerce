@@ -59,6 +59,12 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies AppPageConfig<"/sign-up">
 }
 
+// Validate ..\..\app\(root)\cart\page.tsx
+{
+  const handler = {} as typeof import("..\\..\\app\\(root)\\cart\\page.js")
+  handler satisfies AppPageConfig<"/cart">
+}
+
 // Validate ..\..\app\(root)\page.tsx
 {
   const handler = {} as typeof import("..\\..\\app\\(root)\\page.js")
@@ -69,6 +75,12 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   const handler = {} as typeof import("..\\..\\app\\(root)\\product\\[slug]\\page.js")
   handler satisfies AppPageConfig<"/product/[slug]">
+}
+
+// Validate ..\..\app\(root)\shipping-address\page.tsx
+{
+  const handler = {} as typeof import("..\\..\\app\\(root)\\shipping-address\\page.js")
+  handler satisfies AppPageConfig<"/shipping-address">
 }
 
 // Validate ..\..\app\api\auth\[...nextauth]\route.ts

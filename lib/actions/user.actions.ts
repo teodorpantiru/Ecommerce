@@ -1,12 +1,17 @@
 "use server";
 
-import { signInFormSchema, signUpFormSchema } from "../validator";
-import { signIn, signOut } from "@/auth";
+import {
+  shippingAdressSchema,
+  signInFormSchema,
+  signUpFormSchema,
+} from "../validator";
+import { signIn, signOut, auth } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
 import { formatError } from "../utils";
+import { ShippingAddress } from "@/types";
 
 // Sign in the user with credentials
 
@@ -88,6 +93,46 @@ export async function signUpUser(_: unknown, formData: FormData) {
       return { success: false, message: "This email is already registered." };
     }
 
+    return { success: false, message: formatError(error) };
+  }
+}
+
+// Get a user by id
+
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+  if (!user) throw new Error("User not found");
+  return user;
+}
+
+//Update user's address
+
+export async function updateUserAddress(data: ShippingAddress) {
+  try {
+    const session = await auth();
+
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+
+    if (!currentUser) throw new Error("User not found");
+
+    //And this is where we want to take the data that's passed in. And we want to validate it through the shipping address schema.
+    const address = shippingAdressSchema.parse(data);
+
+    // Now we have the address and we want to update the db
+    await prisma.user.update({
+      where: { id: currentUser.id },
+      data: { address },
+    });
+
+    return {
+      success: true,
+      message: "User address updated successfully",
+    };
+  } catch (error) {
     return { success: false, message: formatError(error) };
   }
 }
