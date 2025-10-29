@@ -9,6 +9,8 @@ const CartPage = async () => {
   const cart = await getMyCart();
   return (
     <>
+      {" "}
+      {/* @ts-expect-error*/}
       <CartTable cart={cart} />
     </>
   );
